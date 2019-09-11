@@ -1,6 +1,8 @@
 # KPI-banner-designer
 Dynamic KPI(Key Performance Indicator) banner designer built using Angular JS
 
+Tools used: HTML, CSS, jQuery, jQueryUI, AngularJS
+
  Instructions:
  
  NOTE:internet connection is must.
