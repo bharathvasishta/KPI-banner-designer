@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+html, body{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background: grey;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #000;
+}
+
+body{
+    background-color: #757471;
+}
+.container{
+       display: flex;
+    width: 100%;
+}
+.playground{
+    width: 70%;
+}
+.create-kpi{
+    width: 200px;
+    height: 30px;
+    margin: 20px 40px 0 40px;
+    border: 2px solid #000;
+    background-color:#57575c;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 16px -10px black;
+}
+.tools{
+    width:20%;
+    height: fit-content;
+    border: 2px solid #000;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 10px 36px -10px black;
+    font-size: 11pt;
+    background-color: grey;
+}
+.wrapper{
+    width: 300px;
+    height: auto;
+    border: 2px dashed #000;
+    background-color:#57575c;
+    text-align: center;
+    margin: 20px 40px 0 40px;
+    cursor: grab;
+    color: #fff; 
+    min-height: 100px;
+    box-shadow: 0 10px 16px -10px black
+}
+.wrapper .kpihead{
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper .kpiicons{
+    margin: 0 0 5px 0;
+    padding: 10px 10px 0 10px;
+    cursor: pointer;
+    color: #fff;
+}
+.fa-times:before {
+    content: "\f00d";
+    color: #fff;
+}
+.wrapper #kpiClose{
+    margin: 0 5px;  
+    background-color: transparent;
+    border-style: none;
+    color: grey;
+    font-size: 12pt;
+}
+.edit-title{
+    width:20%;
+    height: fit-content;
+    border: 2px solid #000;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 10px 36px -10px black;
+    font-size: 11pt;
+    background-color: grey;
+}
+.edit-text{
+    border-radius: 0px;
+}
+.close{
+    cursor: pointer;
+}
+.tools #chart, .tools #title, .tools #indicators{
+    height: 300px;
+    overflow-y: scroll;
+}
+.tool-tabs{
+    font-size: 12pt;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px;
+}
+.tools #chart{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.tools #chart b{
+    margin-left: 10px;
+    color: grey;
+}
+.tools #chart i{
+    width: inherit;
+    padding: 10px;
+    color: grey;
+    border: 2px solid #e0dcdc;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    list-style-type: none;
+    text-align: center;
+    font-size: 30pt;
+}
+.tools #indicators div{
+    width: inherit;
+    text-align:center;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.tools #indicators div i{
+    cursor: pointer;
+    font-size: 15pt;
+}
+.chart-container{
+    background-color: #fff;
+}
+.tool-tabs #text{
+    padding:5px;
+}
+.tool-tabs #text p{
+    margin: 0;
+}
+.tool-tabs #text .text1, .tool-tabs #text .text2, .tool-tabs #text .text3, .tool-tabs #text .text4{
+    width: inherit;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #e0dcdc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+

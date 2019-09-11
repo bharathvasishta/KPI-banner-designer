@@ -1,0 +1,457 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Assets/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="Assets/css/all.css">
+        <link rel="stylesheet" href="Assets/css/kpi_interaction.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>
+            
+            var app = angular.module('mykpi', []);
+            app.controller('kpicontrol', function($scope){
+                $scope.kpiTitle = "New KPI";
+                $scope.kpiText = "Rewrite your content by clicking on me.";
+            });
+            
+        </script>
+    </head>
+    <body>
+        <div class="container" ng-app="mykpi" ng-controller="kpicontrol">
+            
+            <!------------------------------- KPIs will be created here --------------------------------------->
+             <div class="playground" >
+                 <button class="create-kpi">Create new KPI</button>
+                 <!--------------------- Initial KPI ---------------------->
+                <div class="wrapper" style="border-style: {{kpiBorderstyle}};border-width: {{kpiBordersize}};border-color: {{kpiBordercol}};background-color: {{kpiBackcol}}">
+                    <div class="kpihead">
+                    <p style="margin: 0 0 5px 0;padding: 10px 10px 0 10px;">
+                    <b style="color:{{kpiTitlecolor}};font-size: {{kpiTilesize}}">{{kpiTitle}}</b>
+                    </p>
+                    <div class="kpiicons">
+                        <i class="fas fa-chart-area  add-item" style="cursor: pointer;font-size: 12pt;margin: 0 5px" title="Add items"></i>
+                        <i class="fas fa-palette customize" style="cursor: pointer;font-size: 12pt;margin: 0 5px" title="Customize"></i>
+                        <button id="kpiClose" class="fas fa-times" title="Delete KPI"></button>
+                    </div>
+                    </div>
+                    <div class="kpicontent">
+                        <p style="font-size: {{kpiTextsize}};color: {{kpiTextcolor}};font-weight: {{kpiContentweight}};">{{kpiText}}</p>
+                    </div>
+                    
+                </div>
+                 <!------------------- Modal to customize KPI ------------------------->
+                 
+                 
+                 <!-------------------- Modal to customize text ----------------------->
+                    <div class="edit-text" title="Customize content">
+                     <label style="font-weight: 600">Content:</label><br>
+                     <input type="text" ng-model="kpiText" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                     <label style="font-weight: 600">Content size:</label><br>
+                     <input type="number" ng-model="kpiTextsize" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                     <label style="font-weight: 600">Content color:</label>
+                     <input type="color" ng-model="kpiTextcolor" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px;border-style: none;border: 2px solid #e0dcdc;">
+                    <label style="font-weight: 600">Weight:</label>
+                    <select ng-model="kpiContentweight" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                         <option>bold</option>
+                         <option>bolder</option>
+                         <option>lighter</option>
+                         <option>normal</option>
+                         <option>inherit</option>
+                     </select>    
+                     <center>
+                     <button class="save-text" style="width: 100px;height: 30px;border: 2px solid grey; background-color:#f7f7f7; border-radius: 0px; color: #000; cursor: pointer;">Save</button></center>
+                </div>
+                 <!--------------------------------- End of the modal -------------------->
+                            <!-- <div class="edit-title">
+                     <p style="display: flex;justify-content: space-between;margin: 0 0 5px 0">
+                        <b>Customize box</b>
+                        <b class="close">&times;</b>
+                    </p>
+                     <div class="tool-tabs">
+                         <ul class="tool-header">
+                             <li><a href="#cust-kpibox">Title</a></li>
+                             <li><a href="#cust-kpititle">Box wrapper</a></li>
+                               
+                         </ul>
+                         <div id="cust-kpibox">
+                             <label>Title:</label><br>
+                             <input type="text" ng-model="kpiTitle" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                             <label>Title size:</label><br>
+                             <input type="number" ng-model="kpiTilesize" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                             <label>Title color:</label>
+                             <input type="color" ng-model="kpiTitlecolor" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px;border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                         </div>
+                         
+                         <div id="cust-kpititle">
+                             <label>KPI background color:</label><br>
+                             <input type="color" ng-model="kpiBackcol" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                             <label>KPI border size:</label><br>
+                             <input type="number" ng-model="kpiBordersize" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                             <label>KPI border color:</label><br>
+                             <input type="color" ng-model="kpiBordercol" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                             <label>KPI border style:</label><br>
+                             <select ng-model="kpiBorderstyle" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc; border-radius: 5px">
+                                 <option>dashed</option>
+                                 <option>dotted</option>
+                                 <option>solid</option>
+                                 <option>groove</option>
+                                 <option>double</option>
+                                 <option>outset</option>
+                                 <option>inset</option>
+                                 <option>ridge</option>
+                                 <option>none</option>
+                             </select>
+                         </div>
+                        
+                         <center>
+                         <button class="save-title" style="width:100px;height: 30px;border: 2px solid grey; background-color:grey; border-radius: 5px; color: #000; cursor: pointer;font-weight: 600;font-family: 'Roboto', sans-serif;">Save</button></center>
+                     </div>  
+                </div>-->
+                 
+                <br>
+                 <!--<div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart2" style="border:2px solid #e0dcdc"></canvas>
+                </div>
+                 <div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart1" style="border:2px solid #e0dcdc"></canvas>
+                </div>-->
+
+            </div>
+            
+            <!--------------------------- Tools and components to add  ----------------------------->
+            <div class="tools">
+                <p style="display: flex;justify-content: space-between;margin: 0 0 5px 0">
+                        <b>Add items</b>
+                        <b class="close">&times;</b>
+                    </p>
+                <div class="tool-tabs">
+                  <ul class="tab-header">
+                    <li><a href="#chart">Charts</a></li>
+                    <li><a href="#indicators">Indicators</a></li>
+                  </ul>
+
+                  <div id="chart">
+                      <div><i class="fas fa-chart-bar bar-chart"></i><b>Bar chart</b></div>
+                      <div><i class="fas fa-chart-pie"></i><b>Pie chart</b></div>
+                      <div><i class="fas fa-chart-line"></i><b>Line chart</b></div>
+                      <div><i class="fas fa-chart-area"></i><b>Area chart</b></div>
+                      <div><i class="fas fa-project-diagram"></i><b>Scatter chart</b></div>
+                      <div><i class="fas fa-align-left"></i><b>Horizantle bar chart</b></div>
+                  </div>
+                  <div id="indicators">
+                      <div>
+                          <i class="fas fa-arrow-up"></i>
+                          <i class="fas fa-arrow-right"></i>
+                          <i class="fas fa-arrow-down"></i>
+                          <i class="fas fa-arrow-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-arrow-circle-up"></i>
+                          <i class="fas fa-arrow-circle-right"></i>
+                          <i class="fas fa-arrow-circle-down"></i>
+                          <i class="fas fa-arrow-circle-left"></i>
+                      </div>
+                      <div>
+                          <i class="far fa-arrow-alt-circle-up"></i>
+                          <i class="far fa-arrow-alt-circle-right"></i>
+                          <i class="far fa-arrow-alt-circle-down"></i>
+                          <i class="far fa-arrow-alt-circle-left"></i>
+                      </div>                       
+                      <div>
+                          <i class="fas fa-arrow-alt-circle-up"></i>
+                          <i class="fas fa-arrow-alt-circle-right"></i>
+                          <i class="fas fa-arrow-alt-circle-down"></i>
+                          <i class="fas fa-arrow-alt-circle-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-long-arrow-alt-up"></i>
+                          <i class="fas fa-long-arrow-alt-right"></i>
+                          <i class="fas fa-long-arrow-alt-down"></i>
+                          <i class="fas fa-long-arrow-alt-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-sort-up"></i>
+                          <i class="fas fa-sort-down"></i>
+                          <i class="fas fa-level-up-alt"></i>
+                          <i class="fas fa-level-down-alt"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-chevron-up"></i>
+                          <i class="fas fa-chevron-right"></i>
+                          <i class="fas fa-chevron-down"></i>
+                          <i class="fas fa-chevron-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-chevron-circle-up"></i>
+                          <i class="fas fa-chevron-circle-right"></i>
+                          <i class="fas fa-chevron-circle-down"></i>
+                          <i class="fas fa-chevron-circle-left"></i>
+                      </div>  
+                      <div>
+                          <i class="fas fa-caret-up"></i>
+                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-right"></i>
+                          <i class="fas fa-caret-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-angle-up"></i>
+                          <i class="fas fa-angle-right"></i>
+                          <i class="fas fa-angle-down"></i>
+                          <i class="fas fa-angle-left"></i>
+                      </div>
+                      <div>
+                          <i class="fas fa-angle-double-up"></i>
+                          <i class="fas fa-angle-double-right"></i>
+                          <i class="fas fa-angle-double-down"></i>
+                          <i class="fas fa-angle-double-left"></i>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="edit-title">
+                     <p style="display: flex;justify-content: space-between;margin: 0 0 5px 0">
+                        <b>Customize box</b>
+                        <b class="close">&times;</b>
+                    </p>
+                     <div class="tool-tabs">
+                         <ul class="tool-header">
+                             <li><a href="#cust-kpibox">Title</a></li>
+                             <li><a href="#cust-kpititle">Box wrapper</a></li>
+                               
+                         </ul>
+                         <div id="cust-kpibox">
+                             <label>Title:</label><br>
+                             <input type="text" ng-model="kpiTitle" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                             <label>Title size:</label><br>
+                             <input type="number" ng-model="kpiTilesize" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                             <label>Title color:</label>
+                             <input type="color" ng-model="kpiTitlecolor" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px;border-style: none;border: 2px solid #e0dcdc;">
+                         </div>
+                         
+                         <div id="cust-kpititle">
+                             <label>KPI background color:</label><br>
+                             <input type="color" ng-model="kpiBackcol" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                             <label>KPI border size:</label><br>
+                             <input type="number" ng-model="kpiBordersize" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                             <label>KPI border color:</label><br>
+                             <input type="color" ng-model="kpiBordercol" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                             <label>KPI border style:</label><br>
+                             <select ng-model="kpiBorderstyle" style="width:100%;height:30px;margin-top: 10px;margin-bottom: 10px; border-style: none;border: 2px solid #e0dcdc;">
+                                 <option>dashed</option>
+                                 <option>dotted</option>
+                                 <option>solid</option>
+                                 <option>groove</option>
+                                 <option>double</option>
+                                 <option>outset</option>
+                                 <option>inset</option>
+                                 <option>ridge</option>
+                                 <option>none</option>
+                             </select>
+                         </div>
+                        
+                         <center>
+                         <button class="save-title" style="width:100px;height: 30px;border: 2px solid grey; background-color:grey; border-radius: 0px; color: #000; cursor: pointer;font-weight: 600;font-family: 'Roboto', sans-serif;">Save</button></center>
+                     </div>  
+                </div>
+
+        </div>
+        
+        
+        <script src="Assets/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="Assets/js/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+        <script>
+              
+            $(function(){
+                
+////////////////// Appending new KPI //////////////////////////////////
+                
+                $('body').on("click", "#kpiClose", function(){
+                    $(this).closest('.wrapper').remove();
+                });
+                
+                $('.create-kpi').click(function(){
+                    $('.playground').append(`<div class="wrapper" style="border-style: {{kpiBorderstyle}};border-width: {{kpiBordersize}};border-color: {{kpiBordercol}};background-color: {{kpiBackcol}}">
+                    <div class="kpihead">
+                    <p style="margin: 0 0 5px 0;padding: 10px 10px 0 10px;">
+                    <b style="color:{{kpiTitlecolor}};font-size: {{kpiTilesize}}">{{kpiTitle}}</b>
+                    </p>
+                    <div class="kpiicons">
+                        <i class="fas fa-plus-circle add-item" style="cursor: pointer;font-size: 12pt;margin: 0 5px" title="Add items"></i>
+                        <i class="fas fa-palette customize" style="cursor: pointer;font-size: 12pt;margin: 0 5px" title="Customize"></i>
+                        <button id="kpiClose" class="fas fa-times" title="Delete KPI"></button>
+                    </div>
+                    </div>
+                    <div class="kpicontent">
+                        
+                    </div>
+                    
+                </div>`);
+                });
+
+                
+                var originalHeight = parseInt($(".wrapper").height(),10);
+                
+                $('body').on("mouseover", ".wrapper", function(){
+                    $('.wrapper').resizable({
+                    minWidth: originalHeight,
+                    minHeight: originalHeight,
+                    }).droppable().draggable();
+                });
+                $('.edit-text').dialog().parent().hide();
+                
+                /////////////////////// open modal for kpi customization ///////////////
+                $('body').on("click", ".playground .wrapper .customize", function(){
+                    $('.edit-title').show();
+                });
+                $('body').on("click", ".save-title", function(){
+                    $('.edit-title').hide();
+                });
+                
+                ////////////////////// open modal for text customization////////////////
+                 $('body').on("click", ".playground .wrapper .kpicontent p", function(){
+                    $('.edit-text').dialog().parent().show();
+                });
+                $('body').on("click", ".save-text", function(){
+                    $('.edit-text').dialog().parent().hide();
+                });
+                
+                ////////////////////// Appending text and indicators to kpi ////////////////
+                $('body').on("click", "#indicators i", function(){
+                    $(this).clone().appendTo('.kpicontent').css("font-size","20pt").draggable({containment: ".wrapper"}).resizable();   
+                });
+                
+                $('.kpicontent p').draggable({containment: ".wrapper"});
+                                
+///////////////////////// Display/Close Toolbox //////////////////////  
+                
+                $('body').on("click", ".add-item", function(){
+                     $('.tools').css("display","block");
+                });
+                
+                $('.edit-title p b.close').click(function(){
+                    $('.edit-title').css("display", "none");
+                });
+                
+                $('.tools p b.close').click(function(){
+                    $('.tools').css("display", "none");
+                });
+                $('.tools, .edit-title').draggable();
+                $('.tool-tabs').tabs();
+                
+/////////////////// Appending chart ///////////////////////////////////
+                
+                /*$('body').on("click", ".tool-tabs #chart .bar-chart", function(){
+                    $('.playground').append(`<div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart2" style="border:2px solid #e0dcdc"></canvas>
+                </div>`);
+                    $('.chart-container').resizable({
+                    maxWidth: $('.bnr .container').width(),
+                    minWidth:32,
+                    maxHeight: originalHeight+5,
+                    minHeight: originalHeight,
+                }).draggable();
+                });*/
+                $('.tool-tabs #chart .bar-chart').click(function(){
+                    $('.wrapper').append(`<div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart1"></canvas>
+                </div>`);
+                    $('.chart-container').resizable({
+                    maxWidth: $('.wrapper').width(),
+                    minWidth:32,
+                    minHeight: originalHeight,
+                        maxHeight: $('.wrapper').height()-20,
+                }).draggable({containment: ".wrapper"});
+                });
+                
+                $('.chart-container').resizable().draggable();
+                
+                
+                
+////////////////////////// CHART ////////////////////////////
+                
+            var ctx2 = document.getElementById('myChart2').getContext('2d');
+            myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['a', 'b', 'c', 'd', 'e', 'f'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [2,9, 13,18,11,16],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+                
+                var ctx1 = document.getElementById('myChart1').getContext('2d');
+                var myChart = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3,8,16,6],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+               
+                
+            });
+            
+            
+
+            
+        </script>
+    </body>
+</html>

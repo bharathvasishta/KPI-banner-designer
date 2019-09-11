@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+html, body{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+}
+.container{
+       display: flex;
+    width: 100%;
+}
+.playground{
+    width: 70%;
+}
+.create-kpi{
+    width: 200px;
+    height: 30px;
+    margin: 20px 40px 0 40px;
+    border: 2px solid grey;
+    background-color:#f7f7f7;
+    border-radius: 5px;
+    color: grey;
+    cursor: pointer;
+}
+.wrapper{
+    width: fit-content;
+    height: fit-content;
+    border: 2px dashed grey;
+    background-color:#f7f7f7;
+    border-radius: 10px;
+    margin: 20px 40px 0 40px;
+    cursor: pointer;
+    color: grey; 
+    min-height: 150px;
+    padding: 0px 10px 40px 10px;
+    overflow:hidden;
+}
+.wrapper .kpihead{
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper .kpiicons{
+    margin: 0 0 5px 0;
+    padding: 10px 10px 0 10px;
+    cursor: pointer;
+}
+.wrapper .kpiicons i{
+    margin: 0 5px;
+    font-size: 10pt;
+}
+.wrapper #kpiClose{
+    margin: 0 5px;  
+    background-color: transparent;
+    border-style: none;
+    color: grey;
+    font-size: 12pt;
+}
+.kpicontent{
+    margin: 10px;
+    border: 1px dotted skyblue;
+    min-width: 100px;
+    min-height: 100px;
+    width: fit-content;
+    height: fit-content;
+}
+.kpibody{
+   display: flex;
+    flex-wrap: wrap;
+}
+.chart-container{
+    background-color: #fff;
+}
+.kpicontent .tool-watermark{
+    text-align: center;
+}
+.kpicontent i, .kpicontent b, .kpicontent{
+    padding: 2px;
+}
+.kpicontent .kpiparagraph{
+    background-color: aquamarine;
+}
+
+.kpicontent i:hover{
+    border: 1px dotted skyblue;
+}
+
+.kpiparagrapgh{
+    border: 1px dotted skyblue;
+}
+.kpiparagraph:hover{
+    border: 2px dotted skyblue;
+}
+.kpidivide:hover{
+    border: 1px dotted skyblue;
+}
+
+@media only screen and (max-width:400px)
+{
+    .wrapper{
+        width: 300px;
+    }
+}
+.sample{
+    width: 200px;
+    height: 200px;
+    border: 2px solid #000;
+}
+.res{
+    font-size: 40pt
+}
+.draggable{
+    position:fixed;
+}
+
+
+

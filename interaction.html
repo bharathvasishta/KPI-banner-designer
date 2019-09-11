@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="Assets/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="Assets/css/all.css">
+        <link rel="stylesheet" href="Assets/css/interaction.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
+    </head>
+    <body>
+        <div class="container">
+            
+            <!------------------------------- KPIs will be created here --------------------------------------->
+             <div class="playground" ng-app="mykpi" ng-controller="kpicontrol">
+                 <!--------------------- In itial KPI ---------------------->
+               <div class="wrapper" style="border-style: {{kpiBorderstyle}};border-width: {{kpiBordersize}};border-color: {{kpiBordercol}};background-color: {{kpiBackcol}}">
+                    <div class="kpihead">
+                    <p style="margin: 0 0 5px 0;padding: 10px 10px 0 10px;">
+                    <b style="color:{{kpiTitlecolor}};font-size: {{kpiTilesize}}">{{kpiTitle}}</b>
+                    </p>
+                    <div class="kpiicons">
+                        <i class="fas fa-font text" title="Text"></i>
+                        <i class="fas fa-chart-pie chart" title="Chart"></i>
+                        <i class="fas fa-arrow-alt-circle-up indicator" title="Indicators"></i>
+                        <i class="fas fa-divide divider" title="Divider"></i>
+                        <i class="fas fa-puzzle-piece addnewcontainer" ></i>
+                        <!--<i class="fas fa-clone cloneKpi" title="Clone previous KPI section"></i>-->
+                        <button id="kpiClose" class="fas fa-times" title="Delete KPI"></button>
+                    </div>
+                    </div>
+                    <div class="kpibody">
+                        <!--<div class="kpicontent connectedSortable"></div> --> 
+                    </div>   
+                </div>  
+                <br>
+                 <!--<div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart2" ></canvas>
+                </div>
+                 <div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart1" style="border:2px solid #e0dcdc"></canvas>
+                </div>-->
+
+            </div>
+        </div>
+        
+        
+        <script src="Assets/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="Assets/js/jquery-ui.min.js"></script>
+        <script src="Assets/js/script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+        <!--<script src="Assets/js/dropped.js"></script>-->
+        <script>
+            
+            
+              
+            $(function(){
+                
+
+                
+            });
+                   
+        </script>
+    </body>
+</html>

@@ -1,0 +1,273 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="Assets/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="Assets/css/all.css">
+        <link rel="stylesheet" href="Assets/css/new-interaction.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+    <style>
+          #kpisort1, #kpisort2 { list-style-type: none; margin: 0; padding: 0; width: fit-content; }
+  #kpisort1 li, #kpisort2 li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 30px; height: 30px; font-size: 1em; text-align: center; }
+    </style>
+    <body>
+        <div class="container">
+            
+            <!------------------------------- KPIs will be created here --------------------------------------->
+             <div class="playground" ng-app="mykpi" ng-controller="kpicontrol">
+                 <button class="create-kpi">Create new KPI</button>
+                 <!--------------------- Initial KPI ---------------------->
+               <div class="wrapper" style="border-style: {{kpiBorderstyle}};border-width: {{kpiBordersize}};border-color: {{kpiBordercol}};background-color: {{kpiBackcol}}">
+                    <div class="kpihead">
+                    <p style="margin: 0 0 5px 0;padding: 10px 10px 0 10px;">
+                    <b style="color:{{kpiTitlecolor}};font-size: {{kpiTilesize}}">{{kpiTitle}}</b>
+                    </p>
+                    <div class="kpiicons">
+                        <i class="fas fa-font text" title="Text"></i>
+                        <i class="fas fa-chart-pie chart" title="Chart"></i>
+                        <i class="fas fa-funnel-dollar indicator" title="Indicators"></i>
+                        <i class="fas fa-divide divider" title="Divider"></i>
+                        <i class="fas fa-puzzle-piece addnewcontainer" ></i>
+                        <!--<i class="fas fa-clone cloneKpi" title="Clone previous KPI section"></i>-->
+                        <button id="kpiClose" class="fas fa-times" title="Delete KPI"></button>
+                    </div>
+                    </div>
+                    <div class="kpibody">
+                        <ul class="kpicontent connectedSortable" id="kpisort1">
+                            
+                        </ul>
+                        <ul class="kpicontent connectedSortable" id="kpisort2">
+                            
+                        </ul>
+                    </div>   
+                </div>  
+                <br>
+                 <!--<div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart2" ></canvas>
+                </div>
+                 <div class="chart-container" style="position: relative; height:fit-content; width:250px;">
+                     <canvas id="myChart1" style="border:2px solid #e0dcdc"></canvas>
+                </div>-->
+
+            </div>
+            
+        </div>
+        
+        
+        <script src="Assets/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="Assets/js/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+        <script src="Assets/js/new-interaction.js"></script>
+        <!--<script src="Assets/js/dropped.js"></script>
+        <script>
+            
+            
+              
+            $(function(){
+
+                ////////////////// Deleting KPI //////////////////////////////////
+                
+                $('body').on("click", "#kpiClose", function(){
+                    $(this).closest('.wrapper').remove();
+                });
+                $('.kpicontent').resizable();
+                
+                $('#kpisort1').sortable({
+                    connectWith: ".connectedSortable"
+                });
+                $('#kpisort2').sortable({
+                    connectWith: ".connectedSortable"
+                });
+                 $( "#kpisort1, #kpisort2" ).disableSelection();
+                //$("#kpisort1 li, #kpisort2 li").draggable({containment:""});
+                
+                var originalHeight = parseInt($(".wrapper").height(),10);
+                $('body').on("mouseover", ".wrapper", function(){
+                    $('.wrapper').resizable({
+                        minWidth: originalHeight,
+                        minHeight: originalHeight-20,
+                    });
+                });
+                
+//////////////////////////// Appending Indicators to the KPI ///////////////////////                
+                $('body').on("click", ".indicator", function(){
+                    $('.kpibody').append(`<li class="fas fa-arrow-alt-circle-up draggable"></li>`);
+                    $('.kpibody li').draggable({  containment: ".wrapper",revert: "invalid", helper:"clone"});
+                    
+                });
+                
+ //////////////////////////// Appending Text to the KPI ///////////////////////                
+                $('body').on("click", ".text", function(){
+                   $('.kpibody').append(`<li class="draggable kpiparagrapgh"><p style="font-size:10pt">This is a placeholder text.</p></li><br>`);
+                    
+                var initDiagonal;
+                var initFontSize;
+
+                function getContentDiagonal() {
+                    var contentWidth = $(".kpiparagrapgh").width();
+                    var contentHeight = $(".kpiparagrapgh").height();
+                    return contentWidth * contentWidth + contentHeight * contentHeight;
+                }
+                    
+                    $('.kpibody .kpiparagrapgh').draggable({ containment: ".wrapper", revert: "invalid", helper:"clone" }).resizable({
+                        maxHeight: $('.wrapper').height(),
+                        alsoResize: $('.kpiparagrapgh p'),
+                        create: function(event, ui) {
+                            initDiagonal = getContentDiagonal();
+                            initFontSize = parseInt($(".kpiparagrapgh p").css("font-size"));
+                        },
+                        resize: function(e, ui) {
+                            var newDiagonal = getContentDiagonal();
+                            var ratio = newDiagonal / initDiagonal;
+
+                            $(this).find("p").css("font-size", initFontSize + ratio * 3);
+                        }
+                    });
+                });
+                 
+  //////////////////////////// Appending charts to the KPI ///////////////////////               
+                 $('.chart').click(function(){
+                    $('.kpibody').append(`<div class="chart-container draggable" style="position: relative; height:fit-content;width:100px">
+                     <canvas id="myChart1"></canvas>
+                </div>`);
+                    $('.chart-container').resizable({
+                    maxWidth: $('.wrapper').width(),
+                    minWidth:32,
+                    maxHeight: $('.wrapper').height(),
+                    minHeight: 20,
+                    handles: 'n, e, s, w, se, ne, sw, nw'
+                }).draggable({  containment: ".wrapper", revert: "invalid" , helper:"clone" });
+                });
+                /*$('.chart-container').resizable({handles: 'n, e, s, w, se, ne, sw, nw'}).draggable(); */  
+                
+                
+    ////////////////////// Appending another section /////////////////////////////      
+                
+                /* $('body').on("click", ".addnewcontainer", function(){
+                     
+                   $('.kpibody').append(`<div class="kpicontent connectedSortable" style="border: 1px dotted skyblue;width:2px;margin:0 5px; 
+    min-height: 100px;"></div>`);
+                     $('.kpicontent').draggable({containment:".wrapper"})
+                         .resizable({
+                            maxWidth: $('.wrapper').width(),
+                            minWidth:32,
+                            maxHeight: $('.wrapper').height(),
+                            minHeight: 20,
+                            handles: 'n, e, s, w, se, ne, sw, nw'
+                             }).sortable({connectWith: ".connectedSortable"});
+                });
+                
+
+                $('.kpicontent').droppable({
+                    accept: ".draggable",
+                    drop: dropAnimate
+                });
+                function dropAnimate(event,ui){
+                    var kpiHeight = parseInt($(this).height(),10);
+                    var kpiWidth = parseInt($(this).width(),10);
+                    ui.draggable.appendTo($(this));
+                    //ui.draggable.detach().appendTo($(this));
+                    ui.draggable.draggable({
+                        containment: this
+                    })
+                        .resizable({
+                        maxWidth: kpiWidth,
+                        maxHeight: kpiHeight-20
+                    });
+                }*/
+
+                
+                  var ui = $(".kpicontent").closest(".ui-dialog");
+                  ui.resizable("option", "containment", '.wrapper');
+                
+                
+                
+////////////////////////// CHART ////////////////////////////
+                
+            var ctx2 = document.getElementById('myChart2').getContext('2d');
+            myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['a', 'b', 'c', 'd', 'e', 'f'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [2,9, 13,18,11,16],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+                
+                var ctx1 = document.getElementById('myChart1').getContext('2d');
+                var myChart = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3,8,16,6],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+               
+                
+                  var app = angular.module('mykpi', []);
+            app.controller('kpicontrol', function($scope){
+                $scope.kpiTitle = "New KPI";
+            });
+                
+            });
+                   
+        </script>-->
+    </body>
+</html>

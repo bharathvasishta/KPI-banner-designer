@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+html, body{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+}
+.banner-container{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    
+}
+.banner-container .nextkpi, .banner-container .prevkpi{
+   width: fit-content;
+    height: fit-content;
+    background-color: grey;
+    padding: 10px;
+    font-size: 20pt;
+    border-radius: 50%;
+    margin:10px;
+    color: #fff;
+    z-index: 1000;
+    display: none;
+}
+.banner-container .nextkpi a, .banner-container .prevkpi a{
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.flexbanner{
+    display: flex;
+    width: 100%;
+    background-color: #f7f7f7;
+    overflow-x: auto;
+    overflow-x: scroll;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border: 1px solid #e0dcdc;
+}
+.bnr{
+    position: relative;
+    left: auto;
+}
+
+.sec{
+    width: fit-content;
+    height: 160px;
+    border: 1px solid #e0dcdc;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    margin:20px 5px;
+    text-align: center;
+    color: grey;
+    box-shadow: 0 10px 16px -10px black; 
+    cursor: pointer;
+    background-color: #fff;
+}
+.sec .wrapper p{
+    margin: 5px 0 5px 0;
+}
+.container{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    margin: 0 10px;
+   justify-content: space-evenly;
+}
+.container div img{
+    width: 100px;
+    height: auto;
+}
+.container div h1{
+    color: #EC0909;
+    font-size: 15pt;
+}
+.container div svg{
+    width: 20px;
+    height: auto;
+}
+.container div p{
+    color: dodgerblue;
+    align-self: flex-end;
+    font-weight: 600;
+}
+/********second banner*********/
+
+.secbanner .wrapper .container div h1{
+    color: #0CA253;
+}
+.secbanner .wrapper .container div p {
+    color: #0c549c;
+}
+.secbanner img{
+    width: auto;
+    height: 100px;
+}
+.secbanner .dtrends{
+    margin-left: 10px;
+    margin-top: 0px;
+}
+.secbanner .dtrends  .trendtitle{
+    font-weight: 100;
+    font-size: 10pt;
+    margin-top: 30px;
+    margin-bottom: -5px;
+}
+
+/************** fourth banner *****************/
+
+ .fourthbanner{
+    width: fit-content;
+    padding: 5px 10px 15px 10px;
+    height: 150px;
+    border: 1px solid #e0dcdc;
+    border-radius: 5px;
+    margin:20px 5px;
+    color: grey;
+    box-shadow: 0 10px 16px -10px black;
+    background-color: #fff;
+}
+.fourthbanner p{
+     font-size: 8pt;
+}
+ .fourthbanner  h5, .fourthbanner p{
+    margin: 5px 0;   
+}
+.fourthbanner .fb-title p{
+    font-size: 8pt;
+}
+ .fourthbanner .fb-title h1{
+    font-weight:bolder;
+    margin: 10px 0;
+}
+.fourthbanner .fb-title subs{ 
+    margin-left: 10px;
+     font-size: 8pt;
+}
+.fourthbanner .fb-title svg{
+    width: 10px;
+    height: auto;
+    margin-left: -5px;
+}
+.fourthbanner .fb-title img{
+    width:200px;
+}
+.fourthbanner .mcrash h1{
+    font-size: 40pt;
+    margin-top: -5px;
+}
+.fourthbanner .mcrash h4, .fourthbanner .mcrash p{
+    margin-top: 5px;
+}
+
+.fourthbanner .buildwrapper{
+    display: flex;
+}
+ .fourthbanner .buildwrapper .buildcont div{
+    background-color: #e0dcdc;
+    padding:0 10px;
+    border-radius: 5px;
+}
+ .fourthbanner .buildwrapper .buildcont div subs svg{
+    width: 10px;
+}
+.fourthbanner .buildwrapper .buildcont div svg{
+    width: 20px;
+    margin-left: 5px;
+}
+.fourthbanner .buildwrapper .buildimg img{
+    width: 100px;
+    height: auto;
+}
+.fourthbanner i{
+    font-size: 10pt;
+    margin-left: 5px;
+}
+.fourthbanner .ct-chart{
+    width: 100%;
+    height: 50%;
+}
+ .secrow .fb-title, .secrow .buildwrapper, .secrow .buildcont, .secrow .buildimg, .secrow .buildimg img{
+    width:inherit;
+    height:inherit;
+}
+
+/******** Media Queries *************/
+@media only screen and (max-width:1130px)
+{
+    .sec{
+        margin: 0 5px;    
+    }
+    .secbanner{
+        padding-bottom: 10px;
+    }
+    .secbanner .dtrends  .trendtitle{
+        margin-top: 40px;
+    }
+}
+@media only screen and (max-width:970px)
+{
+    .secbanner .dtrends  .trendtitle{
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width:810px)
+{
+    .sec{
+        margin:10px;    
+    }
+    .flexbanner{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+     .banner-container .nextkpi, .banner-container .prevkpi{
+        display: none;
+    }
+}
+@media only screen and (max-width:410px)
+{
+    .secbanner .dtrends{
+        margin-top: -10px;
+    }
+    .container{
+           flex-wrap: wrap;
+    }
+    .buildwrapper{
+        flex-wrap: wrap;
+    }  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
